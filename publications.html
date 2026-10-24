@@ -17,11 +17,11 @@
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
     <nav class="site-nav" id="site-nav" aria-label="Main">
       <ul>
-        <li><a href="index.html#research">Research</a></li>
+        <li><a href="index.html">Welcome</a></li>
+        <li><a href="members.html#professor">Professor</a></li>
+        <li><a href="members.html">Members</a></li>
+        <li><a href="research.html">Research</a></li>
         <li><a href="publications.html" aria-current="page">Publications</a></li>
-        <li><a href="members.html">People</a></li>
-        <li><a href="index.html#news">News</a></li>
-        <li><a href="index.html#join">Join Us</a></li>
         <li><a href="index.html#contact">Contact</a></li>
       </ul>
     </nav>
@@ -44,7 +44,7 @@
         <p id="pub-summary"></p>
         <nav class="tabs" aria-label="Publication views">
           <a href="#all" data-view="all">All publications</a>
-          <a href="#selected" data-view="selected">Selected</a>
+          <a href="#selected" data-view="selected">Selected and highlights</a>
           <a href="#covers" data-view="covers">Journal covers</a>
         </nav>
       </div>
@@ -69,7 +69,7 @@
     <h2 class="section-title" style="margin-top:40px">Selected Publications</h2>
     <ol class="pin-list" id="sel-pins" style="margin-top:22px"></ol>
     <h2 class="section-title" style="margin-top:56px">Recent Highlights</h2>
-    <div id="sel-hl" style="margin-top:12px"></div>
+    <div class="hl-grid" id="sel-hl" style="margin-top:22px"></div>
     <details class="rules"><summary>How these lists are chosen</summary><p id="sel-rules"></p></details>
     <h2 class="section-title" style="margin-top:56px">Earlier highlights</h2>
     <div id="sel-earlier" style="margin-top:12px;margin-bottom:64px"></div>
@@ -81,7 +81,7 @@
   </section>
 </main>
 
-<footer class="site-footer"><div class="wrap" id="footer-body"></div></footer>
+<footer class="site-footer" id="contact"><div class="wrap" id="footer-body"></div></footer>
 
 <script src="_shared/content.js"></script>
 <script src="js/common.js"></script>

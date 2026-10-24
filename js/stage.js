@@ -140,6 +140,7 @@
       this.cache = {};
       this.active = -1;
       this.man = null;
+      this.armed = false;   // no area_* frames until the reader scrolls or the stage is well inside the screen
 
       this.applyMode();
       const mp = window.CCEL_MANIFEST || fetch(BASE + 'manifest.json').then(r => (r.ok ? r.json() : null));
@@ -150,7 +151,7 @@
           if (!e.isIntersecting) return;
           const i = this.chapters.indexOf(e.target);
           this.near[i] = true;
-          if (this.scrubbing()) Loader.want(this.seq(i), i === this.active);
+          if (this.scrubbing() && this.armed) Loader.want(this.seq(i), i === this.active);
         }), { rootMargin: '50% 0px 50% 0px' });   // start a chapter's frames half a screen before it arrives
         this.chapters.forEach(c => io.observe(c));
       } else {
@@ -178,8 +179,19 @@
       this.measure();
       this.active = -1;   // re-run setFront now that posters and sequences exist
       this.layers.forEach(L => { L.k = -1; });
-      this.near.forEach((n, i) => { if (n && this.scrubbing()) Loader.want(this.seq(i), false); });
+      this.near.forEach((n, i) => { if (n && this.scrubbing() && this.armed) Loader.want(this.seq(i), false); });
       this.request();
+    },
+
+    // The stage starts right under the short hero, so it touches the first screen. Its frames are not part of the
+    // first visit: start them on the first scroll, or once the stage top is in the upper 60% of the screen.
+    arm() {
+      if (this.armed) return true;
+      if (scrollY > 0 || this.root.getBoundingClientRect().top < innerHeight * 0.6) {
+        this.armed = true;
+        if (this.scrubbing()) this.near.forEach((n, i) => { if (n) Loader.want(this.seq(i), i === this.active); });
+      }
+      return this.armed;
     },
 
     mode() { return mq.reduce.matches ? 'still' : mq.split.matches ? 'split' : 'stack'; },
@@ -203,7 +215,7 @@
         this.layers.forEach(L => { L.r.setSeq(null); L.k = -1; L.img.removeAttribute('src'); L.el.classList.remove('is-front'); });
         this.chR.forEach(r => r.setSeq(null));
         this.active = -1;
-        if (this.scrubbing()) this.near.forEach((n, i) => { if (n) Loader.want(this.seq(i), false); });
+        if (this.scrubbing() && this.armed) this.near.forEach((n, i) => { if (n) Loader.want(this.seq(i), false); });
       }
       this.measure();
       this.request();
@@ -243,6 +255,7 @@
 
     update() {
       if (!this.chapters.length) return;
+      this.arm();
       const vh = innerHeight;
       const rects = this.chapters.map(c => c.getBoundingClientRect());
       // nothing to do (and nothing to load) while the stage is more than half a screen away
@@ -252,7 +265,9 @@
         const line = vh / 2;
         if (line >= rects[0].top) {
           rects.forEach((r, i) => { if (line >= r.top) k = i; });
-          p = clamp01((line - rects[k].top) / rects[k].height);
+          // the last chapter completes exactly when the pinned column is released (its bottom reaches the screen bottom)
+          const span = k === rects.length - 1 ? rects[k].height - (vh - line) : rects[k].height;
+          p = clamp01((line - rects[k].top) / Math.max(1, span));
         }
         this.setFront(k);
         if (this.scrubbing()) this.layers[this.front].r.setProgress(p);
@@ -265,7 +280,7 @@
           if (this.m === 'stack' && this.scrubbing() && r.bottom > 0 && r.top < vh) {
             const s = this.seq(i);
             this.chR[i].setSeq(s);
-            if (s && this.near[i]) Loader.want(s, i === k);
+            if (s && this.near[i] && this.armed) Loader.want(s, i === k);
             this.chR[i].setProgress(pi);
           }
         });
@@ -293,7 +308,7 @@
       } else if (F) {
         F.el.classList.add('is-front');
       }
-      if (seq && this.scrubbing() && this.near[k]) Loader.want(seq, true);
+      if (seq && this.scrubbing() && this.near[k] && this.armed) Loader.want(seq, true);
       if (this.caption) this.caption.innerHTML = this.titles[k];
     },
 

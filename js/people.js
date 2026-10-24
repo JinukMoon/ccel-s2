@@ -2,7 +2,7 @@
 (function () {
   'use strict';
   const S = window.Site, D = S.D, esc = S.esc, $ = S.$, $$ = S.$$;
-  S.chrome('People');
+  S.chrome('Members');
   const st = S.stats;
 
   $('#people-summary').textContent = st.members + ' current members in ' + D.members.length + ' groups and ' + st.alumni + ' alumni.';

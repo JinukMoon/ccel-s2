@@ -97,9 +97,14 @@
     const cover = S.coverFor(p, 'front');
     return '<li>' + (cover ? '<div class="pin-with-cover">' + cite + '<a class="cover-thumb" href="' + esc(S.src(cover.image)) + '"><img src="' + esc(S.src(cover.image)) + '" alt="Journal cover: ' + esc(S.plain(p.title)) + '" loading="lazy" width="300" height="400"></a></div>' : cite) + '</li>';
   }).join('');
+  // Recent Highlights (curation.recent_highlights, as given): cover cards, moved here from the landing page
   $('#sel-hl').innerHTML = D.curation.recent_highlights.map(no => {
     const p = S.pubByNo.get(no);
-    return p ? S.citation(p, { area: true, coverTag: true, h: 'h3' }) : '';
+    if (!p) return '';
+    const cover = S.coverFor(p, 'front');
+    return '<div class="hl-card' + (cover ? '' : ' no-cover') + '">' +
+      (cover ? '<a class="cover-thumb" href="' + esc(S.paperLink(p) || S.src(cover.image)) + '"><img src="' + esc(S.src(cover.image)) + '" alt="Journal cover: ' + esc(S.plain(p.title)) + '" loading="lazy" decoding="async" width="300" height="400"></a>' : '') +
+      S.citation(p, { area: true, h: 'h3' }) + '</div>';
   }).join('');
   $('#sel-rules').textContent = D.curation.rules + (D.curation.updated_at ? ' (updated ' + D.curation.updated_at + ')' : '');
   $('#sel-earlier').innerHTML = (D.selected_publications || []).map(sp => {

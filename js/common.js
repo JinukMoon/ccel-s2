@@ -33,6 +33,13 @@
     return s;
   }
 
+  // the landing chapters show one line per area: the first sentence of its summary
+  function areaFirstSentence(a) {
+    const s = areaSummary(a);
+    const m = s.match(/^(.+?[.!?])(?=\s+[A-Z(]|\s*$)/);
+    return m ? m[1] : s;
+  }
+
   function paperLink(p) {
     if (p.doi) return 'https://doi.org/' + p.doi;
     return safeUrl(p.url);
@@ -45,6 +52,13 @@
     if (a && t.startsWith(a)) t = t.slice(a.length);
     t = t.replace(/^\s*,\s*/, '').replace(/\s*\(IF\s*=\s*[^)]*\)\s*\.?\s*$/i, '').trim();
     return t;
+  }
+
+  // one short source line: "<journal> <vol> (<year)> <pages>" with the journal name set apart
+  function journalLine(p) {
+    const t = sourceText(p).replace(/\.\s*$/, '');
+    if (p.journal && t.startsWith(p.journal)) return '<span class="jr">' + esc(p.journal) + '</span>' + esc(t.slice(p.journal.length));
+    return esc(t || [p.journal, p.year].filter(Boolean).join(' '));
   }
 
   function boldAuthors(p) {
@@ -204,15 +218,22 @@
     });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenus(); });
 
+    // footer = contact block (the landing nav's "Contact" lands here: index.html#contact)
     const foot = $('#footer-body');
     if (foot) {
       const c = D.contact;
+      const rows = [
+        ['Email', c.email ? '<a href="mailto:' + esc(c.email) + '">' + esc(c.email) + '</a>' : ''],
+        ['Professor office', esc(c.professor_office)],
+        ['Laboratory', esc(c.laboratory)],
+        ['Student office', esc(c.student_office)]
+      ].filter(r => r[1]);
       foot.innerHTML =
         '<div class="foot-grid">' +
           '<img class="ccel-logo" src="' + esc(src(D.lab.logo)) + '" alt="' + esc(D.lab.short + ' — ' + D.lab.name) + '" width="170" height="87" loading="lazy">' +
-          '<div><p class="foot-name">' + esc(D.lab.name) + '</p>' +
-          '<p>' + esc(c.address) + '</p>' +
-          '<p><a href="mailto:' + esc(c.email) + '">' + esc(c.email) + '</a> · ' + esc(c.student_office) + '</p></div>' +
+          '<div><h2 class="foot-title">Contact</h2><p class="foot-name">' + esc(c.lab_name || D.lab.name) + '</p>' +
+          '<p>' + esc(c.address) + '</p></div>' +
+          '<dl class="contact-list">' + rows.map(r => '<dt>' + r[0] + '</dt><dd>' + r[1] + '</dd>').join('') + '</dl>' +
         '</div>' +
         '<div class="sponsors" aria-label="Research sponsors">' +
           D.research.sponsors.map(s => '<img src="' + esc(src(s)) + '" alt="Sponsor logo" loading="lazy" decoding="async">').join('') +
@@ -241,7 +262,7 @@
   }
 
   window.Site = {
-    D, SHARED, esc, rich, plain, src, safeUrl, $, $$, pubByNo, areas, areaBy, areaSummary, citation, coverFor,
+    D, SHARED, esc, rich, plain, src, safeUrl, $, $$, pubByNo, areas, areaBy, areaSummary, areaFirstSentence, journalLine, citation, coverFor,
     paperForCover, paperLink, sourceText, linkIcons, photo, splitName, typeBadge, stats, chrome, settleHash, STATUS_LABEL
   };
 })();
