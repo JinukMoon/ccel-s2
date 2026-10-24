@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Publications · CCEL</title>
+<link rel="stylesheet" href="_shared/brand/brand.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="page-pubs">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header" id="top">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html"><img class="ccel-logo" data-logo alt="CCEL" width="200" height="102"></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html#research">Research</a></li>
+        <li><a href="publications.html" aria-current="page">Publications</a></li>
+        <li><a href="members.html">People</a></li>
+        <li><a href="index.html#news">News</a></li>
+        <li><a href="index.html#join">Join Us</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class="bar" id="bar" aria-hidden="true">
+  <div class="wrap bar-inner">
+    <a class="bar-brand" href="index.html"><img class="bar-logo" data-logo alt="CCEL" width="128" height="65"></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="bar-nav">Menu</button>
+    <nav class="site-nav" id="bar-nav" aria-label="Main (compact)"><ul></ul></nav>
+    <a class="bar-top" href="#top">↑ Top</a>
+  </div>
+</div>
+
+<main id="main">
+  <section class="page-head">
+    <div class="wrap page-head-grid">
+      <div>
+        <h1>Publications</h1>
+        <p id="pub-summary"></p>
+        <nav class="tabs" aria-label="Publication views">
+          <a href="#all" data-view="all">All publications</a>
+          <a href="#selected" data-view="selected">Selected</a>
+          <a href="#covers" data-view="covers">Journal covers</a>
+        </nav>
+      </div>
+      <div class="strip"><img id="strip-img" alt="" width="1280" height="560" decoding="async"></div>
+    </div>
+  </section>
+
+  <section id="all" class="view wrap" aria-label="All publications">
+    <form class="controls" id="controls" role="search" onsubmit="return false">
+      <div class="search"><label for="q">Search</label><input type="search" id="q" placeholder="Title, author or journal" autocomplete="off"></div>
+      <div><label for="f-year">Year</label><select id="f-year"></select></div>
+      <div><label for="f-status">Status</label><select id="f-status"></select></div>
+      <div><label for="f-area">Research area</label><select id="f-area"></select></div>
+      <label class="check"><input type="checkbox" id="f-labled"> Lab-led only</label>
+    </form>
+    <p class="result-line" id="result-line" aria-live="polite"></p>
+    <div id="pub-list"></div>
+    <p class="empty-state" id="empty" hidden>No publication matches these filters.</p>
+  </section>
+
+  <section id="selected" class="view wrap" aria-label="Selected publications" hidden>
+    <h2 class="section-title" style="margin-top:40px">Selected Publications</h2>
+    <ol class="pin-list" id="sel-pins" style="margin-top:22px"></ol>
+    <h2 class="section-title" style="margin-top:56px">Recent Highlights</h2>
+    <div id="sel-hl" style="margin-top:12px"></div>
+    <details class="rules"><summary>How these lists are chosen</summary><p id="sel-rules"></p></details>
+    <h2 class="section-title" style="margin-top:56px">Earlier highlights</h2>
+    <div id="sel-earlier" style="margin-top:12px;margin-bottom:64px"></div>
+  </section>
+
+  <section id="covers" class="view wrap" aria-label="Journal covers" hidden>
+    <p class="result-line" id="cover-line"></p>
+    <div class="cover-grid" id="cover-grid" style="margin-bottom:64px"></div>
+  </section>
+</main>
+
+<footer class="site-footer"><div class="wrap" id="footer-body"></div></footer>
+
+<script src="_shared/content.js"></script>
+<script src="js/common.js"></script>
+<script src="js/pubs.js"></script>
+</body>
+</html>

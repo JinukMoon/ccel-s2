@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CCEL</title>
+<link rel="stylesheet" href="_shared/brand/brand.css">
+<link rel="stylesheet" href="css/site.css">
+<script>
+  // start the (2 KB) frame manifest request in parallel with the data file; the hero poster comes from it
+  window.CCEL_MANIFEST = fetch('_shared/scroll/manifest.json').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
+</script>
+</head>
+<body class="page-home">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header" id="top">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html"><img class="ccel-logo" data-logo alt="CCEL" width="200" height="102"></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html#research">Research</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="members.html">People</a></li>
+        <li><a href="index.html#news">News</a></li>
+        <li><a href="index.html#join">Join Us</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class="bar" id="bar" aria-hidden="true">
+  <div class="wrap bar-inner">
+    <a class="bar-brand" href="index.html"><img class="bar-logo" data-logo alt="CCEL" width="128" height="65"></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="bar-nav">Menu</button>
+    <nav class="site-nav" id="bar-nav" aria-label="Main (compact)"><ul></ul></nav>
+    <a class="bar-top" href="#top">↑ Top</a>
+  </div>
+</div>
+
+<main id="main">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <p class="eyebrow" id="hero-affil"></p>
+      <h1 id="hero-title"></h1>
+      <div class="hero-grid">
+        <div class="hero-text">
+          <p class="lede" id="hero-tagline"></p>
+          <p class="hero-meta" id="hero-meta"></p>
+          <nav class="area-index" aria-labelledby="area-index-label">
+            <h2 class="label" id="area-index-label">Research areas</h2>
+            <ol id="area-index"></ol>
+          </nav>
+        </div>
+        <figure class="hero-fig"><img id="hero-poster" alt="" width="1280" height="720" fetchpriority="high" decoding="async"></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="research" aria-labelledby="research-title">
+    <div class="section research-intro">
+      <div class="wrap intro-grid">
+        <div class="intro-text">
+          <h2 class="section-title" id="research-title">Research</h2>
+          <p class="intro-headline" id="research-headline"></p>
+          <div id="research-intro"></div>
+          <details class="ko-details"><summary>About the lab (Korean)</summary><p lang="ko" id="about-ko"></p></details>
+        </div>
+        <figure class="intro-fig" id="research-fig"></figure>
+      </div>
+    </div>
+    <div class="stage" id="stage"></div>
+  </section>
+
+  <section id="publications" class="section" aria-labelledby="pub-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title" id="pub-title">Selected Publications</h2>
+        <a class="more" id="pub-more" href="publications.html">All publications →</a>
+      </div>
+      <ol class="pin-list" id="pin-list"></ol>
+      <details class="rules"><summary>How Selected Publications and Recent Highlights are chosen</summary><p id="curation-rules"></p></details>
+    </div>
+  </section>
+
+  <section id="highlights" class="section" aria-labelledby="hl-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title" id="hl-title">Recent Highlights</h2>
+        <a class="more" href="publications.html#covers">Journal covers →</a>
+      </div>
+      <div class="hl-grid" id="hl-grid"></div>
+    </div>
+  </section>
+
+  <section id="people" class="section" aria-labelledby="people-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title" id="people-title">People</h2>
+        <a class="more" href="members.html">Members and alumni →</a>
+      </div>
+      <div id="people-body"></div>
+    </div>
+  </section>
+
+  <section id="news" class="section" aria-labelledby="news-title">
+    <div class="wrap two-col">
+      <div>
+        <h2 class="section-title" id="news-title">News</h2>
+        <ul class="news-list" id="news-list" style="margin-top:22px"></ul>
+      </div>
+      <div id="join">
+        <h2 class="section-title">Join Us</h2>
+        <div class="join-box" style="margin-top:22px">
+          <p class="label" style="margin-bottom:8px">Open positions</p>
+          <p lang="ko" id="opening"></p>
+          <p class="mail" id="opening-mail"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section" aria-labelledby="contact-title">
+    <div class="wrap two-col">
+      <div>
+        <h2 class="section-title" id="contact-title">Contact</h2>
+        <p style="margin-top:18px" id="contact-name"></p>
+        <p style="margin-top:6px;color:var(--ink-2)" id="contact-address"></p>
+      </div>
+      <dl class="contact-list" id="contact-list"></dl>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer"><div class="wrap" id="footer-body"></div></footer>
+
+<noscript><p class="wrap" style="padding:24px 0">This page renders from the lab's data file and needs JavaScript.</p></noscript>
+<script src="_shared/content.js"></script>
+<script src="js/common.js"></script>
+<script src="js/stage.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>
