@@ -7,6 +7,10 @@
 <title>Members · CCEL</title>
 <link rel="stylesheet" href="_shared/brand/brand.css">
 <link rel="stylesheet" href="css/site.css">
+<script>
+  // current members first; #alumni or #alumni-<group> opens the alumni view (set before first paint, no flash)
+  document.documentElement.setAttribute('data-view', /^#alumni(-|$)/.test(location.hash) ? 'alumni' : 'members');
+</script>
 </head>
 <body class="page-people">
 <a class="skip" href="#main">Skip to content</a>
@@ -18,11 +22,11 @@
     <nav class="site-nav" id="site-nav" aria-label="Main">
       <ul>
         <li><a href="index.html">Welcome</a></li>
-        <li><a href="members.html#professor">Professor</a></li>
+        <li><a href="professor.html">Professor</a></li>
         <li><a href="members.html" aria-current="page">Members</a></li>
         <li><a href="research.html">Research</a></li>
         <li><a href="publications.html">Publications</a></li>
-        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
   </div>
@@ -37,48 +41,51 @@
 </div>
 
 <main id="main">
-  <section class="page-head">
+  <section class="page-head people-head">
     <div class="wrap page-head-grid">
       <div>
         <h1>Members</h1>
         <p id="people-summary"></p>
-        <nav class="tabs" aria-label="Members page sections">
-          <a href="#professor">Professor</a>
-          <a href="#members">Current members</a>
-          <a href="#alumni">Alumni</a>
-        </nav>
+        <p class="prof-link" id="prof-link"></p>
       </div>
       <div class="strip"><img id="strip-img" alt="" width="1280" height="560" decoding="async"></div>
     </div>
-  </section>
-
-  <section id="professor" class="section" aria-labelledby="prof-title">
-    <div class="wrap" id="prof-body"></div>
-  </section>
-
-  <section id="members" class="section" aria-labelledby="members-title">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 class="section-title" id="members-title">Current members</h2>
+    <div class="wrap view-bar" id="view-bar">
+      <div class="view-row">
+        <div class="view-switch" role="group" aria-label="Show current members or alumni">
+          <a href="#members" data-show="members">Current members <span class="n" id="n-members"></span></a>
+          <a href="#alumni" data-show="alumni">Alumni <span class="n" id="n-alumni"></span></a>
+        </div>
+        <nav class="group-jumps" id="jumps-members" aria-label="Current member groups"></nav>
+        <nav class="group-jumps" id="jumps-alumni" aria-label="Alumni groups"></nav>
       </div>
-      <div class="filter-row" role="group" aria-label="Show members">
+      <div class="filter-row" role="group" aria-label="Research type">
+        <span class="filter-label">Research type</span>
         <button type="button" data-type="" aria-pressed="true">All</button>
-        <button type="button" data-type="computational" aria-pressed="false">Computational</button>
-        <button type="button" data-type="experimental" aria-pressed="false">Experimental</button>
+        <button type="button" class="computational" data-type="computational" aria-pressed="false"><span class="dot" aria-hidden="true"></span>Computational</button>
+        <button type="button" class="experimental" data-type="experimental" aria-pressed="false"><span class="dot" aria-hidden="true"></span>Experimental</button>
       </div>
-      <div id="member-groups"></div>
     </div>
   </section>
 
-  <section id="alumni" class="section" aria-labelledby="alumni-title">
+  <section id="members" class="section people-view" aria-labelledby="members-title">
     <div class="wrap">
-      <div class="section-head"><h2 class="section-title" id="alumni-title">Alumni</h2></div>
+      <h2 class="section-title" id="members-title">Current members</h2>
+      <div id="member-groups"></div>
+      <p class="view-next"><a href="#alumni">Alumni: former members and their current positions →</a></p>
+    </div>
+  </section>
+
+  <section id="alumni" class="section people-view" aria-labelledby="alumni-title">
+    <div class="wrap">
+      <h2 class="section-title" id="alumni-title">Alumni</h2>
       <div id="alumni-groups"></div>
+      <p class="view-next"><a href="#members">← Current members</a></p>
     </div>
   </section>
 </main>
 
-<footer class="site-footer" id="contact"><div class="wrap" id="footer-body"></div></footer>
+<footer class="site-footer"><div class="wrap" id="footer-body"></div></footer>
 
 <script src="_shared/content.js"></script>
 <script src="js/common.js"></script>

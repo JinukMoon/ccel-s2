@@ -1,4 +1,4 @@
-/* CCEL candidate s2-chapters: helpers shared by all three pages.
+/* CCEL candidate s2-chapters: helpers shared by all pages.
    Every fact comes from window.CCEL (_shared/content.js); image paths in the data are relative to _shared/. */
 (function () {
   'use strict';
@@ -148,6 +148,7 @@
     homepage: '<g fill="none" stroke="currentColor" stroke-width="2.1"><circle cx="12" cy="12" r="9.2"/><path d="M2.8 12h18.4M12 2.8c2.6 2.6 3.9 5.7 3.9 9.2s-1.3 6.6-3.9 9.2c-2.6-2.6-3.9-5.7-3.9-9.2S9.4 5.4 12 2.8z"/></g>'
   };
   const LINK_KEYS = [['github', 'GitHub'], ['linkedin', 'LinkedIn'], ['scholar', 'Google Scholar'], ['cv', 'CV'], ['homepage', 'Homepage']];
+  const icon = (k, size) => '<svg viewBox="0 0 24 24" width="' + (size || 17) + '" height="' + (size || 17) + '" aria-hidden="true" focusable="false">' + ICON[k] + '</svg>';
   function linkIcons(links, who) {
     links = links || {};
     const set = LINK_KEYS.filter(([k]) => links[k]);
@@ -155,7 +156,7 @@
     return '<div class="link-icons">' + set.map(([k, label]) => {
       const name = esc(who + ' — ' + label);
       return '<a data-link="' + k + '" href="' + esc(safeUrl(links[k])) + '" target="_blank" rel="noopener" aria-label="' + name + '" title="' + name + '">' +
-        '<svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false">' + ICON[k] + '</svg></a>';
+        icon(k) + '</a>';
     }).join('') + '</div>';
   }
   // "Name (Chief of Lab)" -> name + note line; the text itself is shown unchanged
@@ -218,22 +219,20 @@
     });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenus(); });
 
-    // footer = contact block (the landing nav's "Contact" lands here: index.html#contact)
+    // footer: short contact block (lab, address, email) and the same six links as the header nav.
+    // The full contact details (offices, laboratory, group photo) live on contact.html.
     const foot = $('#footer-body');
     if (foot) {
       const c = D.contact;
-      const rows = [
-        ['Email', c.email ? '<a href="mailto:' + esc(c.email) + '">' + esc(c.email) + '</a>' : ''],
-        ['Professor office', esc(c.professor_office)],
-        ['Laboratory', esc(c.laboratory)],
-        ['Student office', esc(c.student_office)]
-      ].filter(r => r[1]);
+      const links = $$('#site-nav a').map(a =>
+        '<li><a href="' + esc(a.getAttribute('href')) + '">' + esc(a.textContent.trim()) + '</a></li>').join('');
       foot.innerHTML =
         '<div class="foot-grid">' +
           '<img class="ccel-logo" src="' + esc(src(D.lab.logo)) + '" alt="' + esc(D.lab.short + ' — ' + D.lab.name) + '" width="170" height="87" loading="lazy">' +
-          '<div><h2 class="foot-title">Contact</h2><p class="foot-name">' + esc(c.lab_name || D.lab.name) + '</p>' +
-          '<p>' + esc(c.address) + '</p></div>' +
-          '<dl class="contact-list">' + rows.map(r => '<dt>' + r[0] + '</dt><dd>' + r[1] + '</dd>').join('') + '</dl>' +
+          '<div><h2 class="foot-title">' + esc(c.lab_name || D.lab.name) + '</h2>' +
+          '<p>' + esc(c.address) + '</p>' +
+          (c.email ? '<p><a href="mailto:' + esc(c.email) + '">' + esc(c.email) + '</a></p>' : '') + '</div>' +
+          '<nav class="foot-nav" aria-label="Footer"><ul>' + links + '</ul></nav>' +
         '</div>' +
         '<div class="sponsors" aria-label="Research sponsors">' +
           D.research.sponsors.map(s => '<img src="' + esc(src(s)) + '" alt="Sponsor logo" loading="lazy" decoding="async">').join('') +
@@ -244,7 +243,8 @@
 
   // Content is rendered after parse, so the browser's own jump to #hash can land on a half-built page.
   // Re-apply it once rendering (and font loading) has settled, unless the reader has already scrolled.
-  function settleHash() {
+  // `pick(id)` may name a different element to scroll to (members.html: #alumni -> the view switch above it).
+  function settleHash(pick) {
     if (!location.hash) return;
     let moved = false;
     const mark = () => { moved = true; };
@@ -253,7 +253,7 @@
       if (moved) return;
       let id = location.hash.slice(1);
       try { id = decodeURIComponent(id); } catch (e) { /* keep raw */ }
-      const t = document.getElementById(id);
+      const t = (pick && pick(id)) || document.getElementById(id);
       if (t) t.scrollIntoView({ block: 'start' });
     };
     requestAnimationFrame(go);
@@ -263,6 +263,6 @@
 
   window.Site = {
     D, SHARED, esc, rich, plain, src, safeUrl, $, $$, pubByNo, areas, areaBy, areaSummary, areaFirstSentence, journalLine, citation, coverFor,
-    paperForCover, paperLink, sourceText, linkIcons, photo, splitName, typeBadge, stats, chrome, settleHash, STATUS_LABEL
+    paperForCover, paperLink, sourceText, linkIcons, icon, photo, splitName, typeBadge, stats, chrome, settleHash, STATUS_LABEL
   };
 })();

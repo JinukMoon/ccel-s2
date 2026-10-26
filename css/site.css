@@ -284,12 +284,7 @@ html[data-stage="still"] .ch-title { font-size: 26px; }
 .hl-card.no-cover { grid-template-columns: 1fr; }
 @media (max-width: 699.98px) { .hl-grid { grid-template-columns: 1fr; gap: 28px; } .hl-card { grid-template-columns: 92px minmax(0, 1fr); gap: 14px; } }
 
-/* ---------- people ---------- */
-.prof { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 32px; align-items: start; padding-bottom: 36px; border-bottom: 1px solid var(--line); }
-.prof-photo { width: 180px; aspect-ratio: 413 / 531; object-fit: cover; border-radius: var(--radius); background: var(--tint); }
-.prof h3 { font-size: 24px; line-height: 1.3; color: var(--navy); }
-.prof p { margin-top: 6px; color: var(--ink-2); font-size: 16px; }
-.prof .link-icons { margin-top: 10px; }
+/* ---------- people (members.html cards; the professor has professor.html) ---------- */
 /* cards in a grid row share one height: keep icon rows on a common baseline at the card bottom */
 .person .link-icons { margin-top: auto; padding-top: 6px; }
 .people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 32px 28px; }
@@ -299,7 +294,7 @@ html[data-stage="still"] .ch-title { font-size: 26px; }
 .person h4 { font-size: 17px; line-height: 1.35; margin-top: 12px; color: var(--ink); }
 .person .note { display: block; font-size: 13.5px; font-weight: 400; color: var(--muted); margin-top: 2px; }
 .person .ra { font-size: 14.5px; color: var(--ink-2); margin-top: 4px; line-height: 1.45; }
-.type { display: inline-block; font-size: 12.5px; font-weight: 500; margin-top: 6px; padding: 2px 8px; border-radius: 3px; }
+.type { display: inline-block; align-self: flex-start; font-size: 12.5px; font-weight: 500; margin-top: 6px; padding: 2px 8px; border-radius: 3px; }
 .type.computational { background: #eef0f8; color: var(--navy); }
 .type.experimental { background: #fff4e6; color: var(--orange-ink); }
 /* personal links: icon only, rendered only when set; 32px tap target, first icon aligned with the text edge */
@@ -311,8 +306,6 @@ html[data-stage="still"] .ch-title { font-size: 26px; }
 .subhead { font-size: 19px; font-weight: 700; color: var(--ink); margin: 36px 0 18px; display: flex; align-items: baseline; gap: 10px; }
 .subhead .count { font-size: 15px; font-weight: 400; color: var(--muted); }
 @media (max-width: 599.98px) {
-  .prof { grid-template-columns: 112px minmax(0, 1fr); gap: 18px; }
-  .prof-photo { width: 112px; }
   .people-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 14px; }
 }
 
@@ -333,24 +326,22 @@ html[data-stage="still"] .ch-title { font-size: 26px; }
 @media (max-width: 899.98px) { .two-col, .about-grid { grid-template-columns: 1fr; gap: 44px; } .about-grid { gap: 18px; } }
 @media (max-width: 599.98px) { .join-box { padding: 22px 20px; } }
 
-/* ---------- footer = contact (index.html#contact) ---------- */
+/* ---------- footer: lab, address, email and the six nav links (full contact details: contact.html) ---------- */
 .site-footer { background: var(--tint); border-top: 1px solid var(--line); padding: 56px 0 40px; font-size: 15px; color: var(--muted); }
 .foot-grid { display: grid; grid-template-columns: auto minmax(0, 1.1fr) minmax(0, 1fr); gap: 24px 48px; align-items: start; }
 .foot-grid .ccel-logo { width: 170px; }
-.foot-title { font-size: 22px; line-height: 1.3; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+.foot-title { font-size: 17px; line-height: 1.4; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
 .foot-grid p + p { margin-top: 4px; }
-.foot-name { color: var(--ink); font-weight: 500; }
-.contact-list { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 6px 22px; padding-top: 6px; }
-.contact-list dt { font-size: 14.5px; color: var(--muted); }
-.contact-list dd { color: var(--ink); }
+.foot-nav ul { display: grid; grid-template-columns: repeat(2, max-content); gap: 4px 32px; }
+.foot-nav a { display: inline-block; padding: 3px 0; color: var(--ink); font-weight: 500; text-decoration: none; }
+.foot-nav a:hover { color: var(--navy); text-decoration: underline; }
 .sponsors { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 26px; margin-top: 34px; padding-top: 22px; border-top: 1px solid var(--line); }
 .sponsors img { height: 30px; width: auto; max-width: 150px; object-fit: contain; }
 .foot-small { margin-top: 22px; font-size: 13.5px; }
-@media (max-width: 1099.98px) { .foot-grid { grid-template-columns: auto minmax(0, 1fr); } .contact-list { grid-column: 2; } }
+@media (max-width: 1099.98px) { .foot-grid { grid-template-columns: auto minmax(0, 1fr); } .foot-nav { grid-column: 2; } }
 @media (max-width: 599.98px) {
   .foot-grid { grid-template-columns: 1fr; gap: 18px; }
-  .contact-list { grid-column: auto; grid-template-columns: 1fr; gap: 0; }
-  .contact-list dd { margin-bottom: 10px; }
+  .foot-nav { grid-column: auto; }
   .sponsors img { height: 24px; max-width: 120px; }
 }
 
@@ -399,25 +390,118 @@ html[data-stage="still"] .ch-title { font-size: 26px; }
   .cover-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 14px; }
 }
 
-/* members page */
-.filter-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 18px; }
-.filter-row button { border: 1px solid var(--line-2); background: var(--paper); border-radius: 4px; padding: 7px 14px; font-size: 15px; font-weight: 500; cursor: pointer; color: var(--ink-2); }
+/* members page: current members first; the Alumni view sits behind a switch beside the group buttons */
+html[data-view="alumni"] #members, html:not([data-view="alumni"]) #alumni,
+html[data-view="alumni"] #jumps-members, html:not([data-view="alumni"]) #jumps-alumni { display: none; }
+.people-head { padding-bottom: 0; }
+.page-head .prof-link { font-size: 15.5px; color: var(--muted); margin-top: 6px; }
+.prof-link a { font-weight: 500; }
+.view-bar { padding-top: 28px; padding-bottom: 24px; }
+.view-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
+.view-switch { display: inline-flex; flex: none; border: 1px solid var(--navy); border-radius: 5px; overflow: hidden; background: var(--paper); }
+.view-switch a { display: inline-flex; align-items: baseline; justify-content: center; gap: 8px; padding: 10px 18px; font-size: 16px; font-weight: 700; color: var(--navy); text-decoration: none; }
+.view-switch a + a { border-left: 1px solid var(--navy); }
+.view-switch a:hover { background: #eef0f8; }
+.view-switch a[aria-current="true"] { background: var(--navy); color: #fff; }
+.view-switch .n { font-size: 14px; font-weight: 400; }
+.group-jumps { display: flex; flex-wrap: wrap; gap: 6px; padding-left: 18px; border-left: 1px solid var(--line-2); }
+.group-jumps a { padding: 8px 14px; border: 1px solid var(--line-2); border-radius: 4px; text-decoration: none; font-size: 15px; font-weight: 500; color: var(--ink-2); background: var(--paper); }
+.group-jumps a:hover { border-color: var(--navy); color: var(--navy); }
+/* research-type legend = filter; the two type buttons wear the same colours as the card badges */
+.filter-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 16px; }
+.filter-label { font-size: 14px; font-weight: 500; color: var(--muted); margin-right: 6px; }
+.filter-row button { border: 1px solid var(--line-2); background: var(--paper); border-radius: 4px; padding: 6px 13px; font-size: 14.5px; font-weight: 500; cursor: pointer; color: var(--ink-2); }
+.filter-row button.computational { background: #eef0f8; color: var(--navy); border-color: #dadff0; }
+.filter-row button.experimental { background: #fff4e6; color: var(--orange-ink); border-color: #f4d9bb; }
+.filter-row .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 7px; vertical-align: 1px; background: currentColor; }
 .filter-row button[aria-pressed="true"] { background: var(--navy); color: #fff; border-color: var(--navy); }
+.filter-row button.experimental[aria-pressed="true"] { background: var(--orange-ink); border-color: var(--orange-ink); }
+.people-view .section-title { margin-bottom: 4px; }
+.view-next { margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 16px; font-weight: 500; }
 .person .deg { font-size: 13.5px; color: var(--muted); margin-top: 8px; line-height: 1.45; }
 .person .deg li + li { margin-top: 3px; }
 .person .contact { font-size: 13.5px; color: var(--muted); margin-top: 8px; line-height: 1.45; overflow-wrap: anywhere; }
-.alumni-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 0 36px; }
-.alum { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 14px; padding: 16px 0; border-top: 1px solid var(--line); }
-.alum img, .alum .person-photo { width: 64px; height: 80px; aspect-ratio: auto; object-fit: cover; border-radius: 4px; }
-.alum .person-photo.empty { font-size: 18px; }
-.alum h4 { font-size: 16px; line-height: 1.35; }
-.alum .pos { font-size: 14.5px; color: var(--ink); margin-top: 3px; }
-.alum .deg { font-size: 13px; color: var(--muted); margin-top: 3px; }
-.alum .link-icons { margin-top: 4px; }
-.prof-cv { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; margin-top: 18px; }
-.prof-cv h4 { font-size: 15px; color: var(--muted); font-weight: 500; margin-top: 10px; }
-.prof-cv li { font-size: 15px; color: var(--ink-2); padding: 6px 0; border-top: 1px solid var(--line); line-height: 1.5; }
-@media (max-width: 599.98px) { .alumni-list { grid-template-columns: 1fr; } }
+.person .pos { font-size: 14.5px; line-height: 1.45; color: var(--ink); margin-top: 8px; }
+.pos-label { display: block; font-size: 12.5px; font-weight: 500; color: var(--muted); }
+.people-view { padding-top: 56px; }
+@media (max-width: 479.98px) { .view-switch .n { display: none; } }   /* the counts are in the summary line above */
+@media (max-width: 767.98px) {
+  .people-view { padding-top: 40px; }
+  .view-row { display: block; }
+  .view-switch { display: flex; width: 100%; }
+  .view-switch a { flex: 1 1 50%; align-items: center; padding: 11px 6px; white-space: nowrap; }
+  .filter-row { margin-top: 14px; }
+  .filter-label { flex-basis: 100%; margin: 0 0 2px; }
+  .group-jumps { padding-left: 0; border-left: 0; margin-top: 12px; }
+  .group-jumps a { padding: 7px 11px; font-size: 14.5px; }
+}
+
+/* ---------- professor page: the professor only ---------- */
+.prof-head { padding: 48px 0 56px; background: var(--tint); border-bottom: 1px solid var(--line); }
+.prof-grid { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 48px; align-items: start; }
+.prof-photo { width: 200px; height: auto; aspect-ratio: 413 / 531; object-fit: cover; border-radius: var(--radius); background: var(--paper); }
+.prof-head h1 { font-size: 40px; line-height: 1.2; font-weight: 700; color: var(--navy); margin-top: 4px; }
+.prof-pos { margin-top: 14px; }
+.prof-pos li { font-size: 18px; line-height: 1.5; font-weight: 500; color: var(--ink); }
+.prof-affil { margin-top: 4px; }
+.prof-affil li { font-size: 17px; line-height: 1.55; color: var(--ink-2); }
+.prof-contact { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line-2); max-width: 46em; }
+.prof-contact p { font-size: 17px; color: var(--ink); }
+.prof-contact p + p { margin-top: 4px; }
+.contact-dl > div { display: grid; grid-template-columns: 10em minmax(0, 1fr); gap: 4px 20px; padding: 10px 0; border-bottom: 1px solid var(--line-2); }
+.contact-dl dt { font-size: 14.5px; font-weight: 500; color: var(--muted); padding-top: 1px; }
+.contact-dl dd { color: var(--ink); overflow-wrap: anywhere; }
+.prof-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.btn-link { display: inline-flex; align-items: center; gap: 9px; padding: 9px 16px; border: 1px solid var(--navy); border-radius: 4px; background: var(--paper); color: var(--navy); font-size: 15.5px; font-weight: 500; text-decoration: none; }
+.btn-link:hover { background: var(--navy); color: #fff; }
+.btn-link svg { flex: none; }
+.cv-sec { padding: 64px 0; }
+.cv-sec + .cv-sec { border-top: 1px solid var(--line); }
+.cv-grid { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 48px; align-items: start; }
+.cv-list > li { padding: 18px 0; border-top: 1px solid var(--line); }
+.cv-list > li:first-child { border-top: 0; padding-top: 2px; }
+.cv-org { font-size: 18px; line-height: 1.4; font-weight: 700; color: var(--ink); }
+.cv-loc { font-size: 15.5px; font-weight: 400; color: var(--muted); }
+.cv-roles { margin-top: 6px; }
+.cv-roles > li { display: grid; grid-template-columns: minmax(0, 1fr) 12.5em; gap: 2px 24px; padding: 3px 0; }
+.cv-role { font-size: 16.5px; color: var(--ink-2); }
+.cv-date { font-size: 15px; line-height: 1.75; color: var(--muted); text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.cv-note { grid-column: 1 / -1; font-size: 15px; line-height: 1.5; color: var(--muted); }
+.cv-role b { font-weight: 700; color: var(--ink); }
+.cv-service { margin-top: 8px; padding-top: 22px; border-top: 1px solid var(--line); }
+.cv-subhead { font-size: 18px; line-height: 1.4; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+@media (max-width: 899.98px) {
+  .cv-grid { grid-template-columns: 1fr; gap: 16px; }
+}
+@media (max-width: 699.98px) {
+  .prof-head { padding: 32px 0 40px; }
+  .prof-grid { grid-template-columns: 1fr; gap: 22px; }
+  .prof-photo { width: 150px; }
+  .prof-head h1 { font-size: 30px; }
+  .prof-pos li { font-size: 17px; }
+  .prof-affil li { font-size: 16px; }
+  .prof-contact p { font-size: 16px; }
+  .cv-sec { padding: 44px 0; }
+  .cv-roles > li { grid-template-columns: 1fr; gap: 0; padding: 5px 0; }
+  .cv-date { text-align: left; line-height: 1.5; }
+}
+
+/* ---------- contact page: group photo and the contact details, like the current Contact Us ---------- */
+.contact-head { padding: 40px 0 28px; }
+.contact-sec { padding: 48px 0 88px; }
+.contact-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 56px; align-items: start; }
+.group-photo { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--tint); }
+.group-photo img { width: 100%; height: auto; }
+.contact-body .section-title { font-size: 26px; color: var(--navy); }
+.contact-dl { margin-top: 20px; border-top: 1px solid var(--line-2); }
+.contact-dl > div { grid-template-columns: minmax(0, 1fr); gap: 2px; padding: 12px 0; }   /* label above value: phone numbers stay on one line */
+@media (max-width: 959.98px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+}
+@media (max-width: 767.98px) {
+  .contact-sec { padding: 28px 0 60px; }
+  .contact-body .section-title { font-size: 22px; }
+}
 
 /* research page: five areas, still figures, a sticky I-V bar under the compact header */
 .areas { border-top: 1px solid var(--line); }

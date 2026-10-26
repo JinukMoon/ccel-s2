@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Professor · CCEL</title>
+<link rel="stylesheet" href="_shared/brand/brand.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="page-professor">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header" id="top">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html"><img class="ccel-logo" data-logo alt="CCEL" width="200" height="102"></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html">Welcome</a></li>
+        <li><a href="professor.html" aria-current="page">Professor</a></li>
+        <li><a href="members.html">Members</a></li>
+        <li><a href="research.html">Research</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class="bar" id="bar" aria-hidden="true">
+  <div class="wrap bar-inner">
+    <a class="bar-brand" href="index.html"><img class="bar-logo" data-logo alt="CCEL" width="128" height="65"></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="bar-nav">Menu</button>
+    <nav class="site-nav" id="bar-nav" aria-label="Main (compact)"><ul></ul></nav>
+    <a class="bar-top" href="#top">↑ Top</a>
+  </div>
+</div>
+
+<main id="main">
+  <!-- the professor only, and only what the current CCEL Professor page shows: no member list, no students -->
+  <section class="prof-head" aria-labelledby="prof-name">
+    <div class="wrap prof-grid">
+      <img class="prof-photo" id="prof-photo" alt="" width="413" height="531" decoding="async">
+      <div>
+        <h1 id="prof-name"></h1>
+        <ul class="prof-pos" id="prof-pos"></ul>
+        <ul class="prof-affil" id="prof-affil"></ul>
+        <div class="prof-contact" id="prof-contact"></div>
+        <p class="prof-links" id="prof-links"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cv-sec" id="education" aria-labelledby="edu-title">
+    <div class="wrap cv-grid">
+      <h2 class="section-title" id="edu-title">Education</h2>
+      <ol class="cv-list" id="edu-list"></ol>
+    </div>
+  </section>
+
+  <section class="cv-sec" id="experience" aria-labelledby="exp-title">
+    <div class="wrap cv-grid">
+      <h2 class="section-title" id="exp-title">Experience</h2>
+      <div>
+        <ol class="cv-list" id="exp-list"></ol>
+        <div class="cv-service" id="service">
+          <h3 class="cv-subhead">Editorial &amp; Professional Service</h3>
+          <ul class="cv-roles" id="service-list"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer"><div class="wrap" id="footer-body"></div></footer>
+
+<noscript><p class="wrap" style="padding:24px 0">This page renders from the lab's data file and needs JavaScript.</p></noscript>
+<script src="_shared/content.js"></script>
+<script src="js/common.js"></script>
+<script src="js/professor.js"></script>
+</body>
+</html>
